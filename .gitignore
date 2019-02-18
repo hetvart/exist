@@ -151,3 +151,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# scrapped data files
+parts.json
+
