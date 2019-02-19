@@ -64,6 +64,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    'exist.pipelines.AlignScrapedDataPipeline': 300,
     'exist.pipelines.JsonWriterPipeline': 300,
 }
 
@@ -91,5 +92,5 @@ ITEM_PIPELINES = {
 FILE_NAME = 'car_parts.json'
 
 # Pick up coding
-ENSURE_ASCII = True
+ENSURE_ASCII = False
 ENCODING = 'utf-8'

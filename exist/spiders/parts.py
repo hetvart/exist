@@ -1,5 +1,4 @@
 import scrapy
-import re
 
 
 class PartsSpider(scrapy.Spider):
@@ -28,10 +27,7 @@ class PartsSpider(scrapy.Spider):
         name = row.css('.descr::text').get()
         dates = row.css('.all-offers .stock-info p::text').getall()
         prices = row.css('.all-offers .price::text').getall()
-        # replacing all non-digital characters to get clear price values
-        prices = [re.sub(r'\D', '', price) for price in prices]
         items_available = row.css(' .all-offers .avail::text').getall()
-        items_available = [re.sub(r'\D', '', item) for item in items_available]
         return {
             'Brand': brand,
             'Part Code': part_code,
