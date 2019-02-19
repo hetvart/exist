@@ -67,8 +67,12 @@ the project root as json file in a style like the below one:
  ]
 ```
 
+> NOTE: by default the *.json* file is being saved as it's set in *settings.py*
+You are free to change it on whatever you want.
+
 </p>
 </details>
+
 
 That's it!
 Enjoy :)
