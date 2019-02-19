@@ -64,7 +64,6 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'exist.pipelines.AlignScrapedDataPipeline': 300,
     'exist.pipelines.JsonWriterPipeline': 300,
 }
 

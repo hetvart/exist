@@ -1,5 +1,7 @@
 import scrapy
 
+from exist.items import CarPart, CartPartItemLoader
+
 
 class PartsSpider(scrapy.Spider):
     name = 'car_parts'
@@ -15,24 +17,12 @@ class PartsSpider(scrapy.Spider):
 
     def parse(self, response):
         rows = response.css('#priceBody .rowOffers')
-        rows_dicts = [self.get_row_as_dict(row) for row in rows]
-
-        for row in rows_dicts:
-            yield row
-
-    @staticmethod
-    def get_row_as_dict(row):
-        brand = row.css('.art::text').get()
-        part_code = row.css('.partno::text').get()
-        name = row.css('.descr::text').get()
-        dates = row.css('.all-offers .stock-info p::text').getall()
-        prices = row.css('.all-offers .price::text').getall()
-        items_available = row.css(' .all-offers .avail::text').getall()
-        return {
-            'Brand': brand,
-            'Part Code': part_code,
-            'Part Name': name,
-            'Prices': prices,
-            'Dates': dates,
-            'Items Available': items_available
-        }
+        for row in rows:
+            loader = CartPartItemLoader(item=CarPart(), selector=row)
+            loader.add_css('brand', '.art::text')
+            loader.add_css('part_code', '.partno::text')
+            loader.add_css('name', '.descr::text')
+            loader.add_css('prices', '.all-offers .price::text')
+            loader.add_css('dates', '.all-offers .stock-info p::text')
+            loader.add_css('items_amount', '.all-offers .avail::text')
+            yield loader.load_item()

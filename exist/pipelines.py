@@ -4,17 +4,8 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import re
 
 from scrapy.exporters import JsonItemExporter
-
-
-class AlignScrapedDataPipeline(object):
-    def process_item(self, item, spider):
-        # replacing all non-digital characters to get clear price values
-        item['Prices'] = [re.sub(r'\D', '', price) for price in item['Prices']]
-        item['Items Available'] = [re.sub(r'\D', '', item) for item in item['Items Available']]
-        return item
 
 
 class JsonWriterPipeline(object):
